@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2018 at 12:33 PM
+-- Generation Time: Apr 28, 2018 at 05:04 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.3
 
@@ -56,10 +56,27 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `clients` (
   `username` varchar(50) NOT NULL,
-  `password` varchar(200) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `client_id` int(30) NOT NULL,
   `email` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`username`, `password`, `client_id`, `email`) VALUES
+('500', '123', 2, 'bla@gmail.com'),
+('sad', 'ads', 3, '213@gmail.com'),
+('12312', '12312331', 4, '123@gmail.com'),
+('12312', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 5, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 6, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 7, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 8, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 9, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 10, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 11, '123@gmail.com'),
+('123', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 12, '123@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -190,7 +207,7 @@ ALTER TABLE `albums`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `client_id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comments`
