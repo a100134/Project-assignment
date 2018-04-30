@@ -50,15 +50,18 @@
            <form method="post" action="login.php">
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="username">Username</label>
-            <input type="text" class="form-control" id="username"  placeholder="Enter username" name="username">
+            <input type="text" class="form-control" id="username"  placeholder="Enter username" name="username" required>
           </div>
           <!-- password-->
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="Password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password">
+            <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
           </div>
           <button type="submit" class="btn btn-primary">Login</button>
+
+          
         </form>
+                  <a class="btn btn-primary" href="create_account.php" role="button">Sign up</a>
 
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

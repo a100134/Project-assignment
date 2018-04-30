@@ -1,5 +1,4 @@
-<?php include('create_account.php') ?>
-<!DOCTYPE html>
+<?php session_start();?>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -10,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
-    <title>login!</title>
+    <title>create account</title>
   </head>
   <body>
            <!-- Menu -->
@@ -26,27 +25,32 @@
           <a class="nav-link" href="index.html">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Videos</a>
+        <a class="nav-link" href="videos.html">Videos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Lessons</a>
+        <a class="nav-link" href="lessons.html">Lessons</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Albums</a>
+        <a class="nav-link" href="albums.html">Albums</a>
       </li>
              <li class="nav-item">
-        <a class="nav-link" href="#">Tickets</a>
+        <a class="nav-link" href="tickets.html">Tickets</a>
       </li>             
        <li class="nav-item">
-        <a class="nav-link" href="#">Gallery</a>
-      </li>       
-       <li class="nav-item">
-        <a class="nav-link" href="#">Videos</a>
-                </li></ul>
+        <a class="nav-link" href="gallery.html">Gallery</a>
+      </li>
+         </ul>
           </div>
 
         </nav>
-        
+        <?php
+            if(!empty($_SESSION['exist'])){
+                echo"This username is taken";
+            }
+
+
+
+?>
         <!-- form -->
            <form method="post" action="create.php">
           <div class="form-group mx-auto col-md-4 text-white">
@@ -58,9 +62,12 @@
             <label for="Password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
           </div>
-          <button type="submit" class="btn btn-primary" name="login_user">Login</button>
-          <button  class="btn btn-primary" href="create.php">Sign up</button>
-          
+          <!-- email-->
+           <div class="form-group mx-auto col-md-4 text-white">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter @email" name="email" required>
+          </div>
+          <button type="submit" class="btn btn-primary" name="button">Submit</button>
         </form>
 
     <!-- Bootstrap javascript links -->
@@ -69,29 +76,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   </body>
 </html>
-<?php 
-$errors
-if(isset($_POST['login_user'])){
-       $usern = trim($_POST['username']);
-    $passw = trim($_POST['password']);
-    $passw = hash ("sha256",$passw);
-    if(empty($usern)){
-        array_push($errors, "Username is required");
-    }
-      if (empty($password)) {
-  	array_push($errors, "Password is required");
-  }
-      if (count($errors) == 0) {
-  	
-  	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-  	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
-  	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
-  	  header('location: index.php');
-  	}else {
-  		array_push($errors, "Wrong username/password combination");
-  	}
-  }
-}
- ?>

@@ -1,4 +1,4 @@
-<?php include('create_account.php') ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
-    <title>login!</title>
+    <title>Home</title>
   </head>
   <body>
            <!-- Menu -->
@@ -22,11 +22,11 @@
           
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
-              <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+              <li class="nav-item active">
+          <a class="nav-link" href="index.html">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Videos</a>
+        <a class="nav-link" href="videos.html">Videos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Lessons</a>
@@ -43,25 +43,44 @@
        <li class="nav-item">
         <a class="nav-link" href="#">Videos</a>
                 </li></ul>
+                <?php             if(!empty($_SESSION['username'])){
+                echo $_SESSION['username'];
+            } ?>
           </div>
-
+         <a href="login.html"><i class="fas fa-sign-in-alt"></i> </a>
         </nav>
         
-        <!-- form -->
-           <form method="post" action="create.php">
-          <div class="form-group mx-auto col-md-4 text-white">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username"  placeholder="Enter username" name="username" required>
+        <!-- Carousel -->
+        <div id="carouselIndicators" class="carousel slide container" data-ride="carousel">
+          <ol class="carousel-indicators">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselIndicators" data-slide-to="2"></li>
+          </ol>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100 h-40" src="images/test1.jpg" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="images/test2.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="images/test3.jpg" alt="Third slide">
+            </div>
           </div>
-          <!-- password-->
-          <div class="form-group mx-auto col-md-4 text-white">
-            <label for="Password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
-          </div>
-          <button type="submit" class="btn btn-primary" name="login_user">Login</button>
-          <button  class="btn btn-primary" href="create.php">Sign up</button>
-          
-        </form>
+          <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <div class="p-4 mb-2 text-white text-center">Hello my name is robscallon and this is my website here you can see when i will play live, make an account to buy albums and comment.<br/>These are my social media accounts
+            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-instagram"></i></a></div>
 
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -69,29 +88,3 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
   </body>
 </html>
-<?php 
-$errors
-if(isset($_POST['login_user'])){
-       $usern = trim($_POST['username']);
-    $passw = trim($_POST['password']);
-    $passw = hash ("sha256",$passw);
-    if(empty($usern)){
-        array_push($errors, "Username is required");
-    }
-      if (empty($password)) {
-  	array_push($errors, "Password is required");
-  }
-      if (count($errors) == 0) {
-  	
-  	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-  	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
-  	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
-  	  header('location: index.php');
-  	}else {
-  		array_push($errors, "Wrong username/password combination");
-  	}
-  }
-}
- ?>

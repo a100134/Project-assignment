@@ -1,28 +1,33 @@
+
 <?php 
+    session_start();
 
-   $usern = trim($_POST['username']);
-    $passw = trim($_POST['password']);
-    $email = trim($_POST['email']);
+$errors = array(); 
+if(isset($_POST['button'])){
 
-if((!empty($usern)) && (!empty($passw)) && (!empty($email))){
+
         $passw = hash ("sha256",$passw);
         $conn = mysqli_connect( "localhost", "root","","artist_site");
-        if(mysqli_connect_errno()){
-            echo "Error : Could not connect to database";
-            exit;
-        }
-            else{
+
+    
+            $passw = trim($_POST['password']);
+            $passw = trim($_POST['password']);
+            $email = trim($_POST['email']);
+        $check_query = "SELECT * FROM clients WHERE username='$username'";
+        $result = mysqli_query($conn, $check_query);
+        $row = mysqli_num_rows($result);
+            if($row > 0){
+                $_SESSION['exist'] = true;
+                header('location: create_account.php');
+            }
+        else{
+ 
             $query = "INSERT INTO clients (username, password, email)
             VALUES ('$usern','$passw','$email')";
-            
-            $result = mysqli_query($conn, $query)
-                or die("Error in query: ". mysqli_error($conn));
-                header("Location:index.html");
+                mysqli_query($conn, $query);
+            $_SESSION['username'] = $username;
+            $_SESSION['success'] = "You are a now logged in";
+            header('location: index.php');
                         }
-            echo "accounted created";
-        }
-else{
-    header("Location:create_account.html");
-    echo "Enter all fields";
 }
 ?>
