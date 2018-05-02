@@ -19,6 +19,7 @@
         .bg-company-bluee{
             background-color: #003B46;
         }
+
         .carousel-inner{
           width:100%;
           min-height: 200px;
@@ -36,6 +37,7 @@
 }.fa-instagram{
     color:mediumpurple;
 }
+
             /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {
       margin-bottom: 0;

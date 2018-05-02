@@ -1,4 +1,4 @@
-<?php include('create_account.php') ?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,10 +26,10 @@
           <a class="nav-link" href="index.html">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Videos</a>
+        <a class="nav-link" href="videos.php">Videos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Lessons</a>
+        <a class="nav-link" href="lessons.php">Lessons</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Albums</a>
@@ -48,7 +48,8 @@
         </nav>
         
         <!-- form -->
-           <form method="post" action="create.php">
+           <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
+
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username"  placeholder="Enter username" name="username" required>
@@ -59,9 +60,10 @@
             <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
           </div>
           <button type="submit" class="btn btn-primary" name="login_user">Login</button>
-          <button  class="btn btn-primary" href="create.php">Sign up</button>
+         
           
         </form>
+         <a  class="btn btn-primary" href="create_account.php">Sign up</a>
 
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -70,28 +72,22 @@
   </body>
 </html>
 <?php 
-$errors
+
 if(isset($_POST['login_user'])){
-       $usern = trim($_POST['username']);
-    $passw = trim($_POST['password']);
+       $usern = $_POST['username'];
+    $passw = $_POST['password'];
     $passw = hash ("sha256",$passw);
-    if(empty($usern)){
-        array_push($errors, "Username is required");
-    }
-      if (empty($password)) {
-  	array_push($errors, "Password is required");
-  }
-      if (count($errors) == 0) {
-  	
-  	$query = "SELECT * FROM users WHERE username='$username' AND password='$password'";
-  	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
-  	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
+  	$conn = mysqli_connect( "localhost", "root","","artist_site");
+  	$query = "SELECT * FROM users WHERE username='$usern' AND password='$passw'";
+  	$results = mysqli_query($conn, $query);
+    
+  	if (mysqli_num_rows($results) == 0) {
+  	  $_SESSION['username'] = $usern;
+  	  $_SESSION['success'] = "You are now logged in as ";
   	  header('location: index.php');
+        
   	}else {
-  		array_push($errors, "Wrong username/password combination");
+  		echo"Wrong username/password combination";
   	}
   }
-}
  ?>

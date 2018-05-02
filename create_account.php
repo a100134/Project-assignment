@@ -44,9 +44,12 @@
 
         </nav>
         <?php
-            if(!empty($_SESSION['exist'])){
-                echo"This username is taken";
+            if(isset($_SESSION['exist'])){
+                echo '<div class=" mb-2 text-white ">This username is taken</div>';
             }
+      else{
+          unset($_SESSION['exist']);
+      }
 
 
 
@@ -67,7 +70,7 @@
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" placeholder="Enter @email" name="email" required>
           </div>
-          <button type="submit" class="btn btn-primary" name="button">Submit</button>
+          <button type="submit" class="btn btn-primary" name="signbutton">Submit</button>
         </form>
 
     <!-- Bootstrap javascript links -->

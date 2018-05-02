@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -22,26 +23,36 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="videos.html">Videos</a>
+        <a class="nav-link" href="videos.php">Videos</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="lessons.html">Lessons</a>
+        <a class="nav-link" href="lessons.php">Lessons</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="albums.php">Albums</a>
       </li>
              <li class="nav-item">
-        <a class="nav-link" href="tickets.html">Tickets</a>
+        <a class="nav-link" href="tickets.php">Tickets</a>
       </li>             
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
       </li>       
         </ul>
           </div>
-
+                          <?php
+              if(isset($_SESSION['username'])){
+                echo '<div class=" mb-2 text-white ">'.$_SESSION['username']."</div>";
+                   echo '
+         <a href="logout.php"><i class="fas fa-sign-in-alt"></i> </a>
+        ';
+        
+            }else{echo'<div class="mb-2 text-white ">you can login from here</div>';
+                 echo'
+         <a href="login.php"> <i class="fas fa-sign-in-alt"></i></a>
+        ';} ?>
         </nav>
 
 <!-- Grid row -->

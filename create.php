@@ -2,22 +2,22 @@
 <?php 
     session_start();
 
-$errors = array(); 
-if(isset($_POST['button'])){
+if(isset($_POST['signbutton'])){
 
 
         $passw = hash ("sha256",$passw);
         $conn = mysqli_connect( "localhost", "root","","artist_site");
 
     
-            $passw = trim($_POST['password']);
-            $passw = trim($_POST['password']);
-            $email = trim($_POST['email']);
-        $check_query = "SELECT * FROM clients WHERE username='$username'";
+            $usern = $_POST['username'];
+            $passw = $_POST['password'];
+            $email = $_POST['email'];
+            $passw = hash ('sha256',$usern);
+        $check_query = "SELECT * FROM clients WHERE username='$usern'";
         $result = mysqli_query($conn, $check_query);
         $row = mysqli_num_rows($result);
             if($row > 0){
-                $_SESSION['exist'] = true;
+                $_SESSION['exist'] = "true";
                 header('location: create_account.php');
             }
         else{
