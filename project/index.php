@@ -50,16 +50,18 @@
                 </div>
                 <?php
               if(isset($_SESSION['username'])){
+
                 echo '<div class=" mb-2 text-white ">'.$_SESSION['username']."</div>";
                    echo '
                    
          <a href="logout.php"><i class="fas fa-sign-in-alt"></i> </a>
-        ';
+        ';   
         
             }else{echo'<div class="mb-2 text-white ">you can login from here</div>';
                  echo'
          <a href="login.php"> <i class="fas fa-sign-in-alt"></i></a>
-        ';} ?>
+        ';} 
+                ?>
                 </nav>
         <!-- Carousel -->
         <div id="carouselIndicators" class="carousel slide container" data-ride="carousel">

@@ -91,9 +91,9 @@ if(isset($_POST['login_user'])){
   	$query = "SELECT * FROM clients WHERE username='$usern' AND password='$passw'";
   	$results = mysqli_query($conn, $query);
     
-  	if(mysqli_num_rows($results) == 1) {
+  	if(mysqli_num_rows($results) == 0) {
   	  $_SESSION['username'] = $usern;
-        $row = mysqli_fetch_array($result)
+        $row = mysqli_fetch_array($result);
   	  $_SESSION['client_id'] = $row['client_id'];
   	  header('location: index.php');
         

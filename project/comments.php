@@ -88,9 +88,17 @@ $result = mysqli_query($conn,"SELECT comment FROM comments");
     <button type='submit' class='btn btn-primary' name='Submit'>Submit</button>
   </div>
 </form>";
+          if(isset($_POST['Submit'])){
+              $comment = $_POST['comments'];
+              $client = $_SESSION['client_id'];
+              $query = "INSERT INTO comments(comments, client_id)
+              VALUES('$comment','$client')";
+              mysqli_query($conn, $query);
+          }
+          else{}
           
  }
-      else{echo"login to comment";}
+      else{echo"<div class='p-4 mb-2 text-white text-center'>login to comment</div>";}
 ?>
                    
 
