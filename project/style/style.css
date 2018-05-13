@@ -37,6 +37,9 @@
 }.fa-instagram{
     color:mediumpurple;
 }
+.green{
+    background-color: greenyellow;
+}
 
             /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {

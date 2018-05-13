@@ -42,10 +42,10 @@
         <a class="nav-link" href="tickets.php">Tickets</a>
       </li>             
        <li class="nav-item">
-        <a class="nav-link" href="#">Gallery</a>
+        <a class="nav-link" href="gallery.php">Gallery</a>
       </li>
-      <li>
-      <a class="nav-link" href="comments.php">comments</a>
+       <li class="nav-item">
+        <a class="nav-link" href="comments.php">comments</a>
       </li>       </ul>
                 </div>
                 <?php
@@ -60,39 +60,39 @@
                  echo'
          <a href="login.php"> <i class="fas fa-sign-in-alt"></i></a>
         ';} ?>
-                </nav>
-        <!-- Carousel -->
-        <div id="carouselIndicators" class="carousel slide container" data-ride="carousel">
-          <ol class="carousel-indicators">
-            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselIndicators" data-slide-to="2"></li>
-          </ol>
-          <div class="carousel-inner">
-            <div class="carousel-item active">
-              <img class="d-block w-100 h-40" src="images/test1.jpg" alt="First slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="images/test2.jpg" alt="Second slide">
-            </div>
-            <div class="carousel-item">
-              <img class="d-block w-100" src="images/test3.jpg" alt="Third slide">
-            </div>
-          </div>
-          <a class="carousel-control-prev" href="#carouselIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-        <div class="p-4 mb-2 text-white text-center">Hello my name is robscallon and this is my website here you can see when i will play live, make an account to buy albums and comment.<br/>These are my social media accounts
-            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-instagram"></i></a></div>
-        <a href="help.html" class="btn btn-outline-info text-white">Help</a>
+               </nav>
+
+    <?php 
+
+              $conn = mysqli_connect( "localhost", "root","","artist_site");
+// Check connection
+if (mysqli_connect_errno())
+{
+echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
+
+$result = mysqli_query($conn,"SELECT comment FROM comments");
+      echo "<table class='table table-dark'>
+<tr>
+<th>Comements</th>
+<tr>";
+ while($row = mysqli_fetch_array($result))
+{
+     echo"<tr><td>".$row['comment']."</td></tr>";
+ } 
+                
+      if(isset($_SESSION['username'])){
+     echo"<form method='post' action=''>
+  <div class='form-group'>    <label for='comment'>comments</label>
+    <textarea class='form-control' id='comments' rows='3' name='comments'></textarea>
+    <button type='submit' class='btn btn-primary' name='Submit'>Submit</button>
+  </div>
+</form>";
+          
+ }
+      else{echo"login to comment";}
+?>
+                   
 
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

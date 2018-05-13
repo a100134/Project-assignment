@@ -11,11 +11,12 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
     <title>login!</title>
+    <link rel="icon" type="image/png" href="images/logo.png"/>
   </head>
   <body>
            <!-- Menu -->
-            <nav class="navbar navbar-expand-lg navbar-dark bg-company-bluee">
-          <a class="navbar-brand" href="#">logohere</a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <img src="images/logo.png" width="40px">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -32,23 +33,29 @@
         <a class="nav-link" href="lessons.php">Lessons</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Albums</a>
+        <a class="nav-link" href="albums.php">Albums</a>
+      </li>
+                  <li class="nav-item">
+        <a class="nav-link" href="gigs.php">Gigs</a>
       </li>
              <li class="nav-item">
-        <a class="nav-link" href="#">Tickets</a>
+        <a class="nav-link" href="tickets.php">Tickets</a>
       </li>             
        <li class="nav-item">
-        <a class="nav-link" href="#">Gallery</a>
+        <a class="nav-link" href="gallery.php">Gallery</a>
       </li>       
        <li class="nav-item">
-        <a class="nav-link" href="#">Videos</a>
+        <a class="nav-link" href="videos.php">Videos</a>
+                </li>
+                                            <li class="nav-item">
+        <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
                 </li></ul>
           </div>
 
         </nav>
         
         <!-- form -->
-           <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>" >
+           <form method="post" action="">
 
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="username">Username</label>
@@ -58,9 +65,12 @@
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="Password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
+                     <a href="forgotpass.php">Forgot password?</a>
           </div>
-          <button type="submit" class="btn btn-primary" name="login_user">Login</button>
-         
+          
+          <button type="submit" class="btn btn-primary"
+          name="login_user">Login</button>
+
           
         </form>
          <a  class="btn btn-primary" href="create_account.php">Sign up</a>
@@ -76,18 +86,20 @@
 if(isset($_POST['login_user'])){
        $usern = $_POST['username'];
     $passw = $_POST['password'];
-    $passw = hash ("sha256",$passw);
+    $passw = hash("sha256",$passw);
   	$conn = mysqli_connect( "localhost", "root","","artist_site");
-  	$query = "SELECT * FROM users WHERE username='$usern' AND password='$passw'";
+  	$query = "SELECT * FROM clients WHERE username='$usern' AND password='$passw'";
   	$results = mysqli_query($conn, $query);
     
-  	if (mysqli_num_rows($results) == 0) {
+  	if(mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $usern;
-  	  $_SESSION['success'] = "You are now logged in as ";
+        $row = mysqli_fetch_array($result)
+  	  $_SESSION['client_id'] = $row['client_id'];
   	  header('location: index.php');
         
   	}else {
   		echo"Wrong username/password combination";
   	}
   }
+else{}
  ?>
