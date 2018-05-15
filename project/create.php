@@ -6,7 +6,7 @@ if(isset($_POST['signbutton'])){
 
 
         $passw = hash ("sha256",$passw);
-        $conn = mysqli_connect( "localhost", "root","","artist_site");
+        $conn = mysqli_connect( "localhost", "root","","artist_site","3307");
 
     
             $usern = $_POST['username'];

@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="videos.php">Videos</a>
@@ -43,11 +43,13 @@
       </li>             
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
-      </li>       
-       <li class="nav-item">
-        <a class="nav-link" href="videos.php">Videos</a>
-                </li>
-                                            <li class="nav-item">
+      </li>
+             <li class="nav-item">
+        <a class="nav-link" href="contactus.php">Contact us</a>
+      </li>                                        <li class="nav-item">
+        <a class="nav-link" href="comments.php">comments</a>
+      </li>        
+                            <li class="nav-item">
         <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
                 </li></ul>
           </div>
@@ -87,16 +89,15 @@ if(isset($_POST['login_user'])){
        $usern = $_POST['username'];
     $passw = $_POST['password'];
     $passw = hash("sha256",$passw);
-  	$conn = mysqli_connect( "localhost", "root","","artist_site");
+  	$conn = mysqli_connect( "localhost", "root","","artist_site","3306");
   	$query = "SELECT * FROM clients WHERE username='$usern' AND password='$passw'";
   	$results = mysqli_query($conn, $query);
     
-  	if(mysqli_num_rows($results) == 0) {
+  	if(mysqli_num_rows($results) == 1) {
   	  $_SESSION['username'] = $usern;
-        $row = mysqli_fetch_array($result);
+        $row = mysqli_fetch_array($results);
   	  $_SESSION['client_id'] = $row['client_id'];
-  	  header('location: index.php');
-        
+  	  header('location:index.php');
   	}else {
   		echo"Wrong username/password combination";
   	}

@@ -22,6 +22,9 @@ public class images extends javax.swing.JFrame {
      */
     public images() {
         initComponents();
+
+    }
+public void load(){
                                 try{
             //3306 may need to be changed
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
@@ -39,8 +42,7 @@ DefaultTableModel dab = (DefaultTableModel)imagestab.getModel();
                         }
 catch(Exception e){
 	System.out.println(e);}
-    }
-
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

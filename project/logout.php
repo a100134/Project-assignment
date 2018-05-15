@@ -44,10 +44,14 @@ session_destroy();?>
       </li>             
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
-      </li>       
-       <li class="nav-item">
-        <a class="nav-link" href="videos.php">Videos</a>
-                </li>                          <li class="nav-item">
+      </li>
+                 <li class="nav-item">
+        <a class="nav-link" href="contactus.php">Contact us</a>
+      </li>
+                                                           <li class="nav-item">
+        <a class="nav-link" href="comments.php">comments</a>
+      </li>                 
+                      <li class="nav-item">
         <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
                 </li>
                 </ul>

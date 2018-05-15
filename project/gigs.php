@@ -88,7 +88,6 @@ if(isset($_POST['submit'])){
 
                   $gig = $_POST['gig'];
                  $result = mysqli_query($conn,"SELECT * FROM gigs WHERE Event_name LIKE '%".$gig."%'");
-    echo"123";
 }
       else{
       

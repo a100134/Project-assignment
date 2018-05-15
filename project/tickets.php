@@ -27,7 +27,7 @@
           <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="videos.html">Videos</a>
+        <a class="nav-link" href="videos.php">Videos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="lessons.php">Lessons</a>
@@ -44,7 +44,13 @@
       </li>             
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
-      </li>
+      </li>           
+       <li class="nav-item">
+        <a class="nav-link" href="contactus.php">Contact us</a>
+      </li>                                        <li class="nav-item">
+        <a class="nav-link" href="comments.php">comments</a>
+      </li>        
+
                                 <li class="nav-item">
         <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
                 </li></ul>

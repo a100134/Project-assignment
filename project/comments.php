@@ -44,7 +44,10 @@
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
       </li>
-       <li class="nav-item">
+             <li class="nav-item">
+        <a class="nav-link" href="contactus.php">Contact Us</a>
+      </li>
+       <li class="nav-item active">
         <a class="nav-link" href="comments.php">comments</a>
       </li>       </ul>
                 </div>
@@ -64,38 +67,41 @@
 
     <?php 
 
-              $conn = mysqli_connect( "localhost", "root","","artist_site");
+              $conn = mysqli_connect( "localhost", "root","","artist_site","3306");
 // Check connection
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
 
-$result = mysqli_query($conn,"SELECT comment FROM comments");
+//$result = mysqli_query($conn,"SELECT comment FROM comments");
+      
+$result = mysqli_query($conn,"SELECT comments.comment,clients.username FROM comments INNER JOIN clients ON comments.client_id=clients.client_id");
       echo "<table class='table table-dark'>
 <tr>
-<th>Comements</th>
+<th>Comments</th>
 <tr>";
  while($row = mysqli_fetch_array($result))
 {
-     echo"<tr><td>".$row['comment']."</td></tr>";
- } 
-                
+     echo"<tr><td>".$row['comment']."</td><td>".$row['username']."</td></tr>";
+ }
+               
       if(isset($_SESSION['username'])){
      echo"<form method='post' action=''>
   <div class='form-group'>    <label for='comment'>comments</label>
-    <textarea class='form-control' id='comments' rows='3' name='comments'></textarea>
+    <textarea class='form-control' id='comments' rows='3' name='comments' required></textarea>
     <button type='submit' class='btn btn-primary' name='Submit'>Submit</button>
   </div>
 </form>";
-          if(isset($_POST['Submit'])){
+ 
+          if(isset($_POST['Submit'])&& !empty($_POST['comments'])){
               $comment = $_POST['comments'];
-              $client = $_SESSION['client_id'];
-              $query = "INSERT INTO comments(comments, client_id)
-              VALUES('$comment','$client')";
-              mysqli_query($conn, $query);
+          $client = $_SESSION['client_id'];
+$query = "INSERT INTO comments (comment, client_id)
+VALUES ('$comment','$client')";
+                mysqli_query($conn, $query);
+              exit;
           }
-          else{}
           
  }
       else{echo"<div class='p-4 mb-2 text-white text-center'>login to comment</div>";}

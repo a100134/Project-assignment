@@ -24,6 +24,10 @@ public class menu extends javax.swing.JFrame {
         
         initComponents();
         
+
+    }
+    
+public void load(){
                         try{
             //3306 may need to be changed
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
@@ -41,9 +45,7 @@ DefaultTableModel dab = (DefaultTableModel)Albumstable.getModel();
                         }
 catch(Exception e){
 	System.out.println(e);}
-    }
-    
-
+}
 
     /**
      * This method is called from within the constructor tos the form.
@@ -285,28 +287,9 @@ new menu_1() .setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-
-        
-        try{
-              DefaultTableModel dab = (DefaultTableModel)Albumstable.getModel();
-    
-        dab.fireTableDataChanged();
-            //3306 may need to be changed
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
-	
-	
-	Statement stmt = con.createStatement();
-	ResultSet rs = stmt.executeQuery("Select * from gigs");
-        
-
-        //make it remove rows
-            while (rs.next()) {              
-                dab.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});}
-            con.close();
-            
-                        }
-catch(Exception e){
-	System.out.println(e);}
+        DefaultTableModel dab = (DefaultTableModel)Albumstable.getModel();
+        dab.setRowCount(0);
+        load();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

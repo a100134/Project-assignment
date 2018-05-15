@@ -22,9 +22,12 @@ public class events extends javax.swing.JFrame {
      */
     public events() {
         initComponents();
-                                try{
+        load();
+    }
+public void load(){
+                                    try{
             //3306 may need to be changed
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
 	
 	
 	Statement stmt = con.createStatement();
@@ -39,8 +42,7 @@ DefaultTableModel dab = (DefaultTableModel)eventsTable.getModel();
                         }
 catch(Exception e){
 	System.out.println(e);}
-    }
-
+}
     /**
      * This method is called from within the constructor to  the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -270,7 +272,7 @@ catch(Exception e){
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
          try {               
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
                     	String  name1= name.getText();
         String  loc1= loc.getText();
         //change to date
@@ -282,7 +284,7 @@ catch(Exception e){
                     int selectedRowIndex = eventsTable.getSelectedRow();
                Object id = eventsTable.getValueAt(selectedRowIndex, 0);
 
-            stmt.executeUpdate("UPDATE gigs SET Event_name='"+name1+"',Location='"+loc1+"',Date='"+date1+"'Time='"+tim+"',url='"+url1+"'WHERE Gig_id='"+id+"'");
+            stmt.executeUpdate("UPDATE gigs SET Event_name='"+name1+"',Location='"+loc1+"',Date='"+date1+"',Time='"+tim+"',url='"+url1+"'WHERE Gig_id='"+id+"'");
             con.close();
             System.out.println("Record successfully updated");
         } catch (Exception e) {
@@ -291,7 +293,7 @@ catch(Exception e){
 
     private void DelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelActionPerformed
          try {               
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
 
             Statement stmt = con.createStatement();
         int selectedRowIndex = eventsTable.getSelectedRow();
@@ -304,28 +306,9 @@ catch(Exception e){
     }//GEN-LAST:event_DelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  DefaultTableModel dab = (DefaultTableModel)eventsTable.getModel();
-        for( int i = eventsTable.getRowCount() - 1; i >= 0; i-- ) {
-        dab.removeRow(i);
-    }
-        
-        try{
-            //3306 may need to be changed
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
-	
-	
-	Statement stmt = con.createStatement();
-	ResultSet rs = stmt.executeQuery("Select * from gigs");
-        
-
-        //make it remove rows
-            while (rs.next()) {              
-                dab.addRow(new Object[]{rs.getInt(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});}
-            con.close();
-            
-                        }
-catch(Exception e){
-	System.out.println(e);}
+        DefaultTableModel dab = (DefaultTableModel)eventsTable.getModel();
+        dab.setRowCount(0);
+        load();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void urlActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_urlActionPerformed
