@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
-    <title>login!</title>
+    <title>Gigs</title>
     <link rel="icon" type="image/png" href="images/logo.png"/>
   </head>
   <body>
@@ -35,7 +35,7 @@
       <li class="nav-item">
         <a class="nav-link" href="albums.php">Albums</a>
       </li>
-                  <li class="nav-item">
+                  <li class="nav-item active">
         <a class="nav-link" href="gigs.php">Gigs</a>
       </li>
              <li class="nav-item">
@@ -43,31 +43,63 @@
       </li>             
        <li class="nav-item">
         <a class="nav-link" href="gallery.php">Gallery</a>
-      </li>       
+      </li>         
        <li class="nav-item">
-        <a class="nav-link" href="videos.php">Videos</a>
-                </li>
+        <a class="nav-link" href="contactus.php">Contact us</a>
+      </li>                                           <li class="nav-item">
+        <a class="nav-link" href="comments.php">comments</a>
+      </li>   
+
                                             <li class="nav-item">
         <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
                 </li></ul>
           </div>
-
+                            <?php
+              if(isset($_SESSION['username'])){
+                echo '<div class=" mb-2 text-white ">'.$_SESSION['username']."</div>";
+                   echo '
+                   
+         <a href="logout.php"><i class="fas fa-sign-in-alt"></i> </a>
+        ';
+        
+            }else{echo'<div class="mb-2 text-white ">you can login from here</div>';
+                 echo'
+         <a href="login.php"> <i class="fas fa-sign-in-alt"></i></a>
+        ';} ?>
         </nav>
         <br/>
+        <form class="form-inline" method="post" action="">
+  <div class="form-group mx-sm-3 mb-2">
+    <input type="text" class="form-control" id="gig" placeholder="Gig" name="gig">
+  </div>
+  <button type="submit" class="btn btn-primary mb-2" name="submit">search</button>
+</form>
 <?php
-        $conn = mysqli_connect( "localhost", "root","","artist_site");
+        $conn = mysqli_connect( "localhost", "root","","artist_site","3306");
 // Check connection
 if (mysqli_connect_errno())
 {
 echo "Failed to connect to MySQL: " . mysqli_connect_error();
 }
+            
 
-$result = mysqli_query($conn,"SELECT * FROM gigs");
+     
+if(isset($_POST['submit'])){
 
+                  $gig = $_POST['gig'];
+                 $result = mysqli_query($conn,"SELECT * FROM gigs WHERE Event_name LIKE '%".$gig."%'");
+    echo"123";
+}
+      else{
+      
+
+  $result = mysqli_query($conn,"SELECT * FROM gigs");
+
+      }
 echo "<table class='table table-dark'>
 <tr>
-<th></th>
 <th>Event Name</th>
+<th>Location</th>
 <th>Date</th>
 <th>Time</th>
 <th>url</th>
@@ -77,6 +109,7 @@ echo "<table class='table table-dark'>
 while($row = mysqli_fetch_array($result))
 {
 echo "<tr>";
+    
 echo "<td>" . $row['Event_name'] . "</td>";
 echo "<td>" . $row['Location'] . "</td>";
 echo "<td>" . $row['Date'] . "</td>";
@@ -84,6 +117,7 @@ echo "<td>".$row['Time'] . "</td>";
     echo '<td><a href="'.$row['url'] . '">'.$row['url'].'</td>';
 echo "</tr>";
 }
+
 echo "</table>";
       ?>
     <!-- Bootstrap javascript links -->
