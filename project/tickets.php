@@ -34,7 +34,7 @@
       </li>
       
       <li class="nav-item">
-        <a class="nav-link" href="albums.php">Albums</a>s
+        <a class="nav-link" href="albums.php">Albums</a>
       </li>
                               <li class="nav-item">
         <a class="nav-link" href="gigs.php">Gigs</a>

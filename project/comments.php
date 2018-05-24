@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
-    <title>Home</title>
+    <title>comments</title>
     <link rel="icon" type="image/png" href="images/logo.png"/>
     </head>
   <body>
@@ -33,7 +33,7 @@
         <a class="nav-link" href="lessons.php">Lessons</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="albums.html">Albums</a>
+        <a class="nav-link" href="albums.php">Albums</a>
       </li>
                               <li class="nav-item">
         <a class="nav-link" href="gigs.php">Gigs</a>
@@ -49,7 +49,10 @@
       </li>
        <li class="nav-item active">
         <a class="nav-link" href="comments.php">comments</a>
-      </li>       </ul>
+      </li>
+                                            <li class="nav-item">
+        <a class="nav-link" href="https://open.spotify.com/artist/0A51LEnyTnXX33IyuwM0Ts">Listen</a>
+                </li>      </ul>
                 </div>
                 <?php
               if(isset($_SESSION['username'])){
@@ -80,7 +83,7 @@ $result = mysqli_query($conn,"SELECT comments.comment,clients.username FROM comm
       echo "<table class='table table-dark'>
 <tr>
 <th>Comments</th>
-<tr>";
+</tr>";
  while($row = mysqli_fetch_array($result))
 {
      echo"<tr><td>".$row['comment']."</td><td>".$row['username']."</td></tr>";

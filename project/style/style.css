@@ -40,6 +40,9 @@
 .green{
     background-color: greenyellow;
 }
+.backy {
+    background-color: aliceblue;
+}
 
             /* Remove the navbar's default margin-bottom and rounded borders */ 
     .navbar {

@@ -1,4 +1,3 @@
-
 <?php 
     session_start();
 
@@ -6,13 +5,13 @@ if(isset($_POST['signbutton'])){
 
 
         $passw = hash ("sha256",$passw);
-        $conn = mysqli_connect( "localhost", "root","","artist_site","3307");
+        $conn = mysqli_connect( "localhost", "root","","artist_site","3306");
 
     
             $usern = $_POST['username'];
             $passw = $_POST['password'];
             $email = $_POST['email'];
-            $passw = hash ('sha256',$usern);
+            $passw = hash('sha256',$passw);
         $check_query = "SELECT * FROM clients WHERE username='$usern'";
         $result = mysqli_query($conn, $check_query);
         $row = mysqli_num_rows($result);
@@ -25,8 +24,6 @@ if(isset($_POST['signbutton'])){
             $query = "INSERT INTO clients (username, password, email)
             VALUES ('$usern','$passw','$email')";
                 mysqli_query($conn, $query);
-            $_SESSION['username'] = $username;
-            $_SESSION['success'] = "You are a now logged in";
             header('location: index.php');
                         }
 }

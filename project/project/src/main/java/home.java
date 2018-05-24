@@ -15,6 +15,7 @@ public class home extends javax.swing.JFrame {
      */
     public home() {
         initComponents();
+        setTitle("Login");
     }
 
     /**
@@ -34,11 +35,17 @@ public class home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        username.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usernameActionPerformed(evt);
+            }
+        });
+
         jLabel1.setText("Username:");
 
         jLabel2.setText("Password:");
 
-        jButton1.setText("jButton1");
+        jButton1.setText("Login");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -60,7 +67,7 @@ public class home extends javax.swing.JFrame {
                     .addComponent(username))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(197, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE)
                 .addComponent(jButton1)
                 .addGap(130, 130, 130))
         );
@@ -91,7 +98,14 @@ public class home extends javax.swing.JFrame {
         new menu_1() .setVisible(true);
         this.dispose();
     }
+        else{
+            System.out.println("Incorrect credientials");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usernameActionPerformed
 
     /**
      * @param args the command line arguments

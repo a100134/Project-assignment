@@ -67,7 +67,7 @@
           <div class="form-group mx-auto col-md-4 text-white">
             <label for="Password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Enter your Password" name="password" required>
-                     <a href="forgotpass.php">Forgot password?</a>
+                     <a href="forgetpass.php">Forgot password?</a>
           </div>
           
           <button type="submit" class="btn btn-primary"

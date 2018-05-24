@@ -22,7 +22,8 @@ public class images extends javax.swing.JFrame {
      */
     public images() {
         initComponents();
-
+        setTitle("images");
+        load();
     }
 public void load(){
                                 try{
@@ -111,6 +112,11 @@ catch(Exception e){
         });
 
         jButton4.setText("Back");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Refresh");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -187,7 +193,9 @@ catch(Exception e){
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        DefaultTableModel dab = (DefaultTableModel)imagestab.getModel();
+        dab.setRowCount(0);
+        load();        // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -230,6 +238,11 @@ catch(Exception e){
 catch(Exception e){
 	System.out.println(e);}
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+new menu_1() .setVisible(true);
+        this.dispose();          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments

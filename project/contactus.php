@@ -27,7 +27,7 @@
           <a class="nav-link" href="index.php">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="videos.html">Videos</a>
+        <a class="nav-link" href="videos.php">Videos</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="lessons.php">Lessons</a>
@@ -122,7 +122,7 @@ if(isset($_POST['check'])){
     $mail = new PHPMailer\PHPMailer\PHPMailer();
     $mail->IsSMTP(); // enable SMTP                         // Passing `true` enables exceptions
 
-    $mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+    $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
     $mail->SMTPAuth = true; // authentication enabled
     $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
     $mail->Host = "smtp.gmail.com";
@@ -133,15 +133,18 @@ if(isset($_POST['check'])){
     $mail->SetFrom($to);
     $mail->Subject = $subject;
     $mail->Body = $comment;
-    $mail->AddAddress($email);
+    $mail->addAddress($email);
+    $mail->addAddress($to);
         $checks=1;
-        if($checks = 1){
-
-        echo "Message has been sent";
-        }
+        if(!$mail->send()){
+        echo "error";
     }
+        else{
+            echo"message has been sent";
+        }
         
   	}
+}
 
 
 ?>

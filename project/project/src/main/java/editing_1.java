@@ -21,7 +21,7 @@ public class editing_1 extends javax.swing.JFrame {
      */
     public editing_1() {
         initComponents();
-    
+        setTitle("Add gig");
     }
 
 

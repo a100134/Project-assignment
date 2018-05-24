@@ -38,7 +38,7 @@ session_destroy();?>
       </li>
                               <li class="nav-item">
         <a class="nav-link" href="gigs.php">Gigs</a>
-      </li>s
+      </li>
              <li class="nav-item">
         <a class="nav-link" href="tickets.php">Tickets</a>
       </li>             

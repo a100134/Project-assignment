@@ -33,7 +33,7 @@
         <a class="nav-link" href="lessons.php">Lessons</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="albums.html">Albums</a>
+        <a class="nav-link" href="albums.php">Albums</a>
       </li>
                               <li class="nav-item">
         <a class="nav-link" href="gigs.php">Gigs</a>
@@ -42,11 +42,9 @@
         <a class="nav-link" href="tickets.php">Tickets</a>
       </li>             
        <li class="nav-item">
-        <a class="nav-link" href="#">Gallery</a>
+        <a class="nav-link" href="gallery.php">Gallery</a>
       </li>
-      <li>
-      <a class="nav-link" href="comments.php">comments</a>
-      </li>
+
                         <li class="nav-item">
         <a class="nav-link" href="contactus.php">Contact us</a>
       </li>                                       <li class="nav-item">
@@ -100,10 +98,12 @@
         </div>
         <div class="p-4 mb-2 text-white text-center">Hello my name is robscallon and this is my website here you can see when i will play live, make an account to buy albums and comment.<br/>These are my social media accounts
             <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-youtube"></i></a>
-            <a href="https://www.facebook.com/RobScallonMusic/"><i class="fab fa-instagram"></i></a></div>
+            <a href="https://www.youtube.com/channel/UCyDZai57BfE_N0SaBkKQyXg"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.instagram.com/robscallon/"><i class="fab fa-instagram"></i></a></div>
         <a href="help.html" class="btn btn-outline-info text-white">Help</a>
-
+<audio controls autoplay>
+     <source src="music/first.mp3" type="audio/mpeg">
+      </audio>
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>

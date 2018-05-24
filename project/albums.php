@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"  href="style/style.css">
-    <title>videos</title>
+    <title>albumss</title>
     <link rel="icon" type="image/png" href="images/logo.png"/>
   </head>
   <body>
@@ -103,26 +103,97 @@ echo "<td style='width: 20%'><form method='post' action=''>
         <button type='submit' class='btn btn-warning' name='add'>Buy</button>
         </form></td>";
 echo "</tr>";
-    
+ 
 }
+      echo"</table>";
       if(isset($_SESSION['username'])){
+                    $clientid  = $_SESSION['client_id'];
       if((isset($_POST['add'])) && ($_POST['quantity']>0)){
           $albumid = $_POST['hidden_id'];
           
-          $clientid  = $_SESSION['client_id'];
-          $quant = $_POST['quantity'];
-        $totalcost += ($_POST['hidden_price'] * $quant );
+          
+$quant = $_POST['quantity'];
           mysqli_query($conn,"INSERT INTO cart (item_quantity,client_id,album_id) VALUES('$quant','$clientid','$albumid')");
           
+      }                if(isset($_POST['final'])){
+
+                    
+          mysqli_query($conn,"INSERT INTO orders (client_id)VALUES ($clientid)");
+          $ord = mysqli_insert_id($conn);
+                    
+        $result = mysqli_query($conn,"SELECT album_id FROM cart  WHERE client_id='$clientid'");
+                  
+                  
+                    while($row = mysqli_fetch_array($result)){
+                        $alb = $row['album_id'];
+        mysqli_query($conn,"INSERT INTO order_items (Album_id, order_id) VALUES ('$alb','$ord')");
+                            $to = "supertestbla@gmail.com";
+
+                            $pass = "bla1bla2bla3";
+    $to = "supertestbla@gmail.com";
+     $result1 = mysqli_query($conn,"SELECT email  FROM clients WHERE client_id='$clientid'");
+                        $rows = mysqli_fetch_array($result1);
+          
+                            
+                            $email = $rows['email'];
+                            $recied = "Hello".$_SESSION['username']."your order has been recognised and will be processed in the next few dayss";
+  require("phpmailer/src/PHPMailer.php");
+  require("phpmailer/src/SMTP.php");
+    $mail = new PHPMailer\PHPMailer\PHPMailer();
+    $mail->IsSMTP(); // enable SMTP                         // Passing `true` enables exceptions
+
+    $mail->SMTPDebug = 0; // debugging: 1 = errors and messages, 2 = messages only
+    $mail->SMTPAuth = true; // authentication enabled
+    $mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+    $mail->Host = "smtp.gmail.com";
+    $mail->Port = 465; // or 587
+    $mail->IsHTML(true);
+    $mail->Username = $to;
+    $mail->Password = $pass;
+    $mail->SetFrom($to);
+    $mail->Subject = "recied";
+    $mail->Body = $recied;
+    $mail->addAddress($email);
+        $checks=1;
+        if(!$mail->send()){
+        echo "error";
+    }
+        else{
+            echo"recied has been sent";
+        }
+                        
+                        
+                        
+        mysqli_query($conn,"DELETE FROM cart WHERE client_id='$clientid'");
+
       }
-          $result = mysqli_query($conn,"SELECT * FROM cart WHERE client_id='$clientid'");
+                }
+
+          $result = mysqli_query($conn,"SELECT cart.item_quantity,cart.client_id,cart.album_id , albums.cost,albums.name FROM cart  INNER JOIN albums ON (albums.album_id = cart.album_id)WHERE client_id='$clientid'");
+          echo'<form method="POST" action="albums.php"><table class="table table-bordered table-light mx-auto "style="width: 60%"><tr><th>Album name</th><th>cost</th><th>quantity</th></tr>';
           while($row = mysqli_fetch_array($result))
-          {echo'<div class="jumbotron">'.$row["quantity"];}
-}
+          {
+              echo'<tr><td><input type="hidden" name="albumname" value="'.$row['name'].'">'.$row['name'].'</td>';
+echo "<td style='width: 20%'><input type='hidden' name='cost2' value='". $row['cost']."'>". $row['cost']."</td>";
+              echo "<td style='width: 20%'><input type='hidden' name='qunatity1' value='". $row['item_quantity'] . "'>". $row['item_quantity'] . "</td></tr>";
+              $totalcost +=($row['cost']*$row['item_quantity']);
+
+                
+          }
+          
+
+            echo'<tr><td class="text-right" colspan="3">'.$totalcost.'</td></tr><tr><td colspan="3"><button type="submit" class="btn btn-danger float-right" name="final">Submit</button></td></tr> </table></form> ';
+
+            
+
+
+      
+      }
   else {
         echo"you need to login to buy Albums!";  
       }
-echo "</table>";
+
+      
       ?>
     <!-- Bootstrap javascript links -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

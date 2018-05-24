@@ -23,11 +23,12 @@ public class events extends javax.swing.JFrame {
     public events() {
         initComponents();
         load();
+        setTitle("gigs");
     }
 public void load(){
                                     try{
             //3306 may need to be changed
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
 	
 	
 	Statement stmt = con.createStatement();
@@ -70,8 +71,7 @@ catch(Exception e){
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         date = new javax.swing.JTextField();
-        hours = new javax.swing.JSpinner();
-        mins = new javax.swing.JSpinner();
+        time = new javax.swing.JTextField();
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -155,6 +155,11 @@ catch(Exception e){
         });
 
         jButton2.setText("back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -162,9 +167,11 @@ catch(Exception e){
             }
         });
 
-        hours.setModel(new javax.swing.SpinnerNumberModel(0, 0, 24, 1));
-
-        mins.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        time.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -172,6 +179,19 @@ catch(Exception e){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(79, 79, 79)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(name)
+                            .addComponent(loc)
+                            .addComponent(url, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                            .addComponent(date)
+                            .addComponent(time))
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -187,24 +207,7 @@ catch(Exception e){
                         .addGap(18, 18, 18)
                         .addComponent(Del1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(name)
-                                .addComponent(loc)
-                                .addComponent(url, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
-                                .addComponent(date))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(mins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(43, 43, 43)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jButton1)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -229,10 +232,9 @@ catch(Exception e){
                             .addComponent(jLabel3)
                             .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel4)
-                            .addComponent(hours, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(mins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(url, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,19 +268,21 @@ catch(Exception e){
         name.setText(model.getValueAt(selectedRowIndex, 4 ).toString());
         loc.setText(model.getValueAt(selectedRowIndex, 1 ).toString());
         date.setText(model.getValueAt(selectedRowIndex, 2).toString());
+        time.setText(model.getValueAt(selectedRowIndex, 3).toString());
         url.setText(model.getValueAt(selectedRowIndex, 5).toString());   
         // TODO add your handling code here:
     }//GEN-LAST:event_eventsTableMouseClicked
 
     private void updateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateActionPerformed
          try {               
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
                     	String  name1= name.getText();
         String  loc1= loc.getText();
         //change to date
+        String tim = time.getText();
         String date1 = date.getText();
         //change to time
-         String tim = hours.getValue().toString()+":"+ mins.getValue().toString()+":00";
+
         String url1 = url.getText();
             Statement stmt = con.createStatement();
                     int selectedRowIndex = eventsTable.getSelectedRow();
@@ -293,7 +297,7 @@ catch(Exception e){
 
     private void DelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DelActionPerformed
          try {               
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3307/artist_site","root","");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
 
             Statement stmt = con.createStatement();
         int selectedRowIndex = eventsTable.getSelectedRow();
@@ -318,6 +322,15 @@ catch(Exception e){
     private void dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dateActionPerformed
+
+    private void timeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_timeActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+new menu_1() .setVisible(true);
+        this.dispose();          // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,7 +372,6 @@ catch(Exception e){
     private javax.swing.JButton Del1;
     private javax.swing.JTextField date;
     private javax.swing.JTable eventsTable;
-    private javax.swing.JSpinner hours;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -371,8 +383,8 @@ catch(Exception e){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField loc;
-    private javax.swing.JSpinner mins;
     private javax.swing.JTextField name;
+    private javax.swing.JTextField time;
     private javax.swing.JButton update;
     private javax.swing.JTextField url;
     // End of variables declaration//GEN-END:variables

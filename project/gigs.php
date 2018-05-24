@@ -24,7 +24,7 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-          <a class="nav-link" href="index.html">Home</a>
+          <a class="nav-link" href="index.php">Home</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="videos.php">Videos</a>

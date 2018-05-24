@@ -3,9 +3,6 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileSystemView;
-import javax.swing.filechooser.FileNameExtensionFilter;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -23,6 +20,7 @@ public class imageadd extends javax.swing.JFrame {
      */
     public imageadd() {
         initComponents();
+        setTitle("Add image");
     }
 
     /**
@@ -91,7 +89,7 @@ public class imageadd extends javax.swing.JFrame {
     }//GEN-LAST:event_nameActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-	                  try {               
+	                  try {    
                     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/artist_site","root","");
                     	String  name1= name.getText();
             Statement stmt = con.createStatement();

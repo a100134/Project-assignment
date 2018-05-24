@@ -20,6 +20,7 @@ public class editing extends javax.swing.JFrame {
      */
     public editing() {
         initComponents();
+        setTitle("Add Album");
     }
 
     /**
@@ -31,6 +32,7 @@ public class editing extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu2 = new javax.swing.JMenu();
         name = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         image = new javax.swing.JTextField();
@@ -38,6 +40,8 @@ public class editing extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         cost = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+
+        jMenu2.setText("jMenu2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +86,7 @@ public class editing extends javax.swing.JFrame {
                     .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +105,7 @@ public class editing extends javax.swing.JFrame {
                     .addComponent(cost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(46, 46, 46)
                 .addComponent(jButton1)
-                .addContainerGap(105, Short.MAX_VALUE))
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();
@@ -174,6 +178,7 @@ public class editing extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JTextField name;
     // End of variables declaration//GEN-END:variables
 }
